@@ -1,0 +1,10 @@
+
+<div class="d-flex mb-4">
+                    <h4 class=" d-inline-block pr-3 mr-3 "> {{ nameModel }}</h4>
+                   <a href="{% url 'security:home' %}"> <i class="mdi mdi-home text-muted hover-cursor"></i> Inicio </a>
+                   
+                   <p class="breadcrumb-item {% if main == 0 %}active{% endif %} " aria-current="page">&nbsp;/&nbsp;{% if main == 1 %}<a href="{% url textUrl %}">Listado {{ nameModel }}</a>{% else %}Listado {{ nameModel }}{% endif %}</p>
+                {% if main == 1 %}
+                    <p class="breadcrumb-item active" aria-current="page">{{ action }} {{ nameModel }}</p>
+                {% endif %}
+</div>

@@ -1,0 +1,80 @@
+{% comment %} <div class="modal fade" id="modal-country" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="label-title-country">Crear Pais</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="picker-form">
+                    {% include 'location/countries/partials/_form.html' %}
+                    {% csrf_token %}
+                    <div class="text-center mt-5">
+                        <button class="btn btn-success btn-s"
+                                data-json='{"route":"{% url "location:country.store"%}","modal" :"#modal-country"}'
+                        > <i class="fa fa-save"></i>  Guardar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endcomment %}
+{% comment %} <div class="modal fade" id="modal-province" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="label-title-province">Crear Provincia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="picker-form">
+                    {% include 'location/provinces/partials/_form.html' %}
+                    {% csrf_token %}
+                    <div class="text-center mt-5">
+                        <button class="btn btn-success btn-s"
+                                data-json='{"route":"{% url "location:province.store"%}","modal" :"#modal-province"}'
+                        > <i class="fa fa-save"></i>  Guardar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+{% comment %} <div class="modal fade" id="modal-canton" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="label-title-canton">Crear Provincia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="picker-form">
+                    {% include 'location/cantons/partials/_form.html' %}
+                    {% csrf_token %}
+                    <div class="text-center mt-5">
+                        <button class="btn btn-success btn-s"
+                                data-json='{"route":"{% url "location:canton.store"%}","modal" :"#modal-canton"}'
+                        > <i class="fa fa-save"></i>  Guardar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}

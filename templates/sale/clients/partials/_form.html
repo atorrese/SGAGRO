@@ -1,0 +1,128 @@
+{# Name ee#}
+
+<div class="form-group row">
+    <label for="Names" class="col-form-label col-lg-3 col-sm-12 text-center">Nombres</label>
+    <div class="col-lg-6 col-md-9 col-sm-12">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control Names {% if form.Names.errors %}is-invalid{% endif %}"
+                   name="Names"
+                   id="Names"
+                   placeholder="Cliente" value="{{ Names}}">
+            <div class="invalid-feedback">
+                {% for error in form.Names.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="form-group row">
+    <label for="SurNames" class="col-form-label col-lg-3 col-sm-12 text-center">Apellidos</label>
+    <div class="col-lg-6 col-md-9 col-sm-12">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control SurNames {% if form.SurNames.errors %}is-invalid{% endif %}"
+                   name="SurNames"
+                   id="SurNames"
+                   placeholder="Apellidos" value="{{ SurNames}}">
+            <div class="invalid-feedback">
+                {% for error in form.SurNames.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="IdentificationCard" class="col-form-label col-lg-3 col-sm-12 text-center">Cedula</label>
+    <div class="col-lg-6 col-md-9 col-sm-12">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control IdentificationCard {% if form.IdentificationCard.errors %}is-invalid{% endif %}"
+                   name="IdentificationCard"
+                   id="IdentificationCard"
+                   placeholder="Cedula" value="{{ IdentificationCard}}">
+            <div class="invalid-feedback">
+                {% for error in form.IdentificationCard.errors %}
+                    {{ error }}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="Phone" class="col-form-label col-lg-3 col-sm-12 text-center">Telefono</label>
+    <div class="col-lg-6 col-md-9 col-sm-12">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control Phone {% if form.Phone.errors %}is-invalid{% endif %}"
+                   name="Phone"
+                   id="Phone"
+                   placeholder="Telefono" value="{{Phone}}">
+            <div class="invalid-feedback">
+                {% for error in form.Phone.errors %}
+                    {{ error }}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="Email" class="col-form-label col-lg-3 col-sm-12 text-center">Corres Electronico</label>
+    <div class="col-lg-6 col-md-9 col-sm-12">
+        <div class="input-group">
+            <input type="email"
+                   class="form-control Email {% if form.Email.errors %}is-invalid{% endif %}"
+                   name="Email"
+                   id="Email"
+                   placeholder="Correo" value="{{ Email}}">
+            <div class="invalid-feedback">
+                {% for error in form.Email.errors %}
+                    {{ error }}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="City" class="col-form-label col-lg-3 col-sm-12 text-center">Ciudad</label>
+    <div class="col-lg-6 col-md-9 col-sm-12">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control City {% if form.City.errors %}is-invalid{% endif %}"
+                   name="City"
+                   id="City"
+                   placeholder="Ciudad" value="{{ City }}">
+            <div class="invalid-feedback">
+                {% for error in form.City.errors %}
+                    {{ error }}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="Address" class="col-form-label col-lg-3 col-sm-12 text-center">Dirección</label>
+    <div class="col-lg-6 col-md-9 col-sm-12">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control Address {% if form.Address.errors %}is-invalid{% endif %}"
+                   name="Address"
+                   id="Address"
+                   placeholder="Dirección" value="{{ Address}}">
+            <div class="invalid-feedback">
+                {% for error in form.Address.errors %}
+                    {{ error }}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+

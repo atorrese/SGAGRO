@@ -1,0 +1,34 @@
+<nav class="sidebar sidebar-offcanvas menu" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'security:home' %}">
+              <i class="mdi mdi-home menu-icon"></i>
+              <span class="menu-title">Inicio</span>
+            </a>
+          </li>
+           {% for groupM in GroupModules %}
+              <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#id_menu_{{ groupM.name }}" aria-expanded="false" aria-controls="id_menu_{{ groupM.name }}">
+              <i class="{{ groupM.icon }} menu-icon"></i>
+              <span class="menu-title">{{ groupM.name }}</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="id_menu_{{ groupM.name }}">
+              <ul class="nav flex-column sub-menu" >
+                {% for module in groupM.modules.all  %}
+                <li class="nav-item"> <a class="nav-link" href="{{ module.url }}">{{ module.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+            {% endfor %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'security:setting.update' 1 %}">
+              <i class="mdi mdi-settings-box menu-icon"></i>
+              <span class="menu-title">Configuración</span>
+            </a>
+          </li>
+          
+        </ul>
+      </nav>

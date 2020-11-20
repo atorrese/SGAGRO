@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block headcss %}
+     <link href="{% static 'SGAGRO/vendors/select2/css/select2.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        {% include 'shared/_urlnav.html' with main=1 nameModel='Orden Compra' action='Crear'  textUrl='purchase:order.index'%}
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card card-shadow mb-4">
+                    <div class="card-header border-0">
+                        <div class="custom-title-wrap bar-primary">
+                            <div class="custom-title text-center m-1"><h3>Formulario de Orden de Compra</h3></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'purchase:order.store' %}" class="picker-form form-invoice">
+                            {% csrf_token %}
+
+                            {% include 'purchase/orders/partials/_form.html' %}
+                            <div class="text-center mt-5">
+                                <button class="btn btn-success" id="btn-save" data-json='{"title":"Que quieres Guardar La Orden de Compra!"}'> <i class="fa fa-save"></i>  Guardar</button>
+                                <a class="btn btn-outline-danger" type="button" href="{% url 'purchase:order.index' %}"><i class="fa fa-close"></i>  Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden"  name="html-item" id="html-item" value="purchase/orders/action/add-item.html">
+    <input type="hidden"  name="tipo" id="tipo" value="orden">
+{% include 'purchase/orders/partials/_modals.html' %}
+{% endblock %}
+
+{% block js %}
+    <!--select2-->
+    <script src={% static 'SGAGRO/vendors/select2/js/select2.min.js' %}></script>
+    <!--init select2-->
+    {% comment %}<script src="{% static 'assets/vendor/js-init/init-select2.js' %}"></script>{% endcomment %}
+    <script src="{% static 'SGAGRO/js/Search-Ajax.js' %}"></script>
+    <script src="{% static 'SGAGRO/js/funtion-product.js' %}"></script>
+    <script src="{% static 'SGAGRO/js/order.js' %}"></script>
+    <script src="{% static 'SGAGRO/js/modal-search.js' %}"></script>
+
+    <!--[if lt IE 9]>
+    <script src="assets/vendor/modernizr.js"></script>
+    <![endif]-->
+
+{% endblock %}

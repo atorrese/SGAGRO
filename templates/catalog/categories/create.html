@@ -1,0 +1,28 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        {% include 'shared/_urlnav.html' with main=1 nameModel='Categoria' action='Crear'  textUrl='catalog:category.index'%}
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card card-shadow mb-4">
+                    <div class="card-header border-0">
+                        <div class="custom-title-wrap bar-primary text-center">
+                            <div class="custom-title"><h2>Formulario Categoria</h2></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" class="picker-form">
+                            {% csrf_token %}
+                            {% include 'catalog/categories/partials/_form.html' %}
+                            <div class="text-center mt-5">
+                                <button class="btn btn-success" type="submit"> <i class="mdi mdi-content-save-all"></i>  Guardar</button>
+                                <a class="btn btn-danger" type="button" href="{% url 'catalog:category.index' %}"><i class="mdi mdi-window-close"></i>  Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

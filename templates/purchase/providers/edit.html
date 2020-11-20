@@ -1,0 +1,29 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        {% include 'shared/_urlnav.html' with main=1 nameModel='Proveedor' action='Editar'  textUrl='purchase:provider.index'%}
+        <div class="row">
+            <div class="col-xl-12">
+        <div class="card card-shadow mb-4">
+            <div class="card-header border-0">
+                <div class="custom-title-wrap bar-primary">
+                    <div class="custom-title text-center mb-1 mt-1"><h3 class="">Formulario de Proveedor</h3></div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="POST" class="picker-form">
+                    {% csrf_token %}
+                    {% include 'purchase/providers/partials/_form.html' %}
+                    <div class="text-center mt-5">
+                        <button class="btn btn-success" type="submit"> <i class="fa fa-save"></i>  Guardar</button>
+                        <a class="btn btn-outline-danger" type="button" href="{% url 'purchase:provider.index' %}"><i class="fa fa-close"></i>  Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,5 @@
+<form class="form " action="{% url 'catalog:category.index' %}" method="get" >
+    <div class="row pr-5 justify-content-end">
+        {% include 'shared/_searcher.html' with btnUrl='catalog:category.index' %}
+    </div>
+</form>

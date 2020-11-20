@@ -1,0 +1,130 @@
+    <div class="modal fade" id="modal-category" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="picker-form">
+                        {% include 'catalog/categories/partials/_form.html' %}
+                        {% csrf_token %}
+                        <div class="text-center mt-5">
+                            <button class="btn btn-success btn-s"
+                                    data-json='{"route":"{% url "catalog:category.store"%}","modal" :"#modal-category"}'
+                            > <i class="fa fa-save"></i>  Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-mark" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Marca</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="picker-form">
+                        {% include 'catalog/marks/partials/_form.html' %}
+                        {% csrf_token %}
+                        <div class="text-center mt-5">
+                            <button class="btn btn-success btn-s"
+                                    data-json='{"route":"{% url "catalog:mark.store"%}","modal" :"#modal-mark"}'
+                            > <i class="fa fa-save"></i>  Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+   {% comment %}  <div class="modal fade" id="modal-umeasure" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Unidad de Medida</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="picker-form">
+                        {% include 'catalog/umeasures/partials/_form.html' %}
+                        {% csrf_token %}
+                        <div class="text-center mt-5">
+                            <button class="btn btn-success btn-s"
+                                    data-json='{"route":"{% url "catalog:umeasure.store"%}","modal" :"#modal-umeasure"}'
+                            > <i class="fa fa-save"></i>  Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-taste" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Sabor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="picker-form">
+                        {% include 'catalog/tastes/partials/_form.html' %}
+                        {% csrf_token %}
+                        <div class="text-center mt-5">
+                            <button class="btn btn-success btn-s"
+                                    data-json='{"route":"{% url "catalog:taste.store"%}","modal" :"#modal-taste"}'
+                            > <i class="fa fa-save"></i>  Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-presentation" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Presentación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="picker-form">
+                        {% include 'catalog/presentations/partials/_form.html' %}
+                        {% csrf_token %}
+                        <div class="text-center mt-5">
+                            <button class="btn btn-success btn-s"
+                                    data-json='{"route":"{% url "catalog:presentation.store"%}","modal" :"#modal-presentation"}'
+                            > <i class="fa fa-save"></i>  Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}

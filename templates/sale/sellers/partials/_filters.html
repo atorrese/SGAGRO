@@ -1,0 +1,5 @@
+<form class="form " action="{% url 'sale:seller.index' %}" method="get" >
+    <div class="row mt-3 pr-5 justify-content-end">
+        {% include 'shared/_searcher.html' with btnUrl='sale:seller.index' %}
+    </div>
+</form>

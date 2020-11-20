@@ -1,0 +1,111 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        {% include 'shared/_urlnav.html' with main=0 nameModel='Cliente' %}
+        <div class="row">
+            <div class="col-xl-12">
+        <div class="card card-shadow mb-4">
+            <div class="card-header border-0">
+                <div class="custom-title-wrap bar-primary">
+                    <div class="custom-title text-center mb-1 mt-1"><h3>Listado de Clientes</h3></div>
+                </div>
+            </div>
+            {% include 'shared/_button-new.html' with btnText='Nuevo Cliente' btnUrl='sale:client.store'%}
+
+            {% include 'sale/clients/partials/_filters.html' %}
+            <div class="card-body">
+                <div class="table-responsive text-center">
+                    <div id="data_table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="data_table" class="table table-bordered table-striped  data-table" cellspacing="0" role="grid" aria-describedby="data_table_info">
+                                    <thead>
+                                    <tr role="row" class="odd">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 148px;">Nombres / Apellidos</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40px;">Cedula</th>
+                                        <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 20px;">Telefono</th>
+                                        <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 80px;">Email</th>
+                                        <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Direccion</th>
+                                        <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 150px;">Acciones</th>
+                                    <tbody class="text-center">
+                                    {% for client in clients %}
+                                        <tr role="row" class="even">
+                                            <td>{{ client.Names }} {{ client.SurNames }}</td>
+                                            <td>{{ client.IdentificationCard }}</td>
+                                            <td>{{ client.Phone }}</td>
+                                            <td>{{ client.Email }}</td>
+                                            <td>{{ client.Address}}  - {{ client.City}}</td>
+                                            <td>
+                                                <a class="btn btn-outline-info  btn-sm form-pill btn-edit"
+                                                   data-original-title="Editar"
+                                                   href="{% url 'sale:client.update' pk=client.id %}">
+                                                    <i class="mdi mdi-pencil-box"></i>
+                                                </a>
+
+                                                <a class="btn btn-outline-danger btn-sm form-pill btn-eliminar"
+                                                   href="{% url 'sale:client.delete' pk=client.id %}">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                       {% empty %}
+                                        <tr>
+                                            <td colspan="6" >No existen Registros</td>
+                                        </tr> 
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-7">
+                                {% include 'shared/_pagination.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4" hidden>
+                                    <p>Default</p>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary "  data-toggle="modal" data-target="#exampleModal">
+                                        Launch demo modal
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Woohoo, you're reading this text in a modal!
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    <input type="hidden"  class="href-eliminar" value="{% url 'sale:client.index'%}">
+{% endblock %}
+{% block js %}
+    <script src="{% static 'SGAGRO/js/delete.js' %}"></script>
+{% endblock %}

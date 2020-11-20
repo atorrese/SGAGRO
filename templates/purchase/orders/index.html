@@ -1,0 +1,215 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block headcss %}
+    <link rel="stylesheet" href="{% static 'SGAGRO/vendors/data-tables/dataTables.bootstrap4.min.js' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        {% include 'shared/_urlnav.html' with main=0 nameModel='Orden Compra' %}
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card card-shadow mb-4">
+                    <div class="card-header border-0">
+                        <div class="custom-title-wrap bar-primary">
+                            <div class="custom-title text-center mb-1 mt-1"><h3>Listado de Ordenes De Compra</h3></div>
+                        </div>
+                    </div>
+                    {% include 'shared/_button-new.html' with btnText='Nueva Orden Compra' btnUrl='purchase:order.store'%}
+                    {% include 'purchase/orders/partials/_filters.html' %}
+                    <div class="card-body">
+                        <div class="table-responsive text-center">
+                            <div id="data_table_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="data_table" class="table table-bordered table-striped  data-table" cellspacing="0" role="grid" aria-describedby="data_table_info">
+                                            <thead>
+                                            <tr role="row" class="odd">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 50px;">N°</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 148px;">Proveedor</th>
+                                                <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Fecha</th>
+                                                <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Total</th>
+                                                <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 190px;">Acciones</th>
+                                            <tbody class="text-center">
+                                            {% for order in orders %}
+                                                <tr role="row" class="even">
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ order.ProviderId.BussinessName}}</td>
+                                                    <td>{{ order.DateOrder | date:'Y-m-d'}}</td>
+                                                    <td>{{ order.TotalPay}}</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-info  btn-sm form-pill btn-detail"
+                                                           data-original-title="Detalle"
+                                                           href='javascript:;' url ='{% url 'purchase:order.show' pk=order.id %}' >
+                                                            <i class="mdi mdi-buffer"></i>
+                                                        </a>
+                                                        <a class="btn btn-outline-success  btn-sm form-pill hidden" hidden
+                                                           data-original-title="Editar"
+                                                           href='{% url 'purchase:order.update' pk=order.id %}'>
+                                                            <i class="mdi mdi-pencil-box"></i>
+                                                        </a>
+                                                        <a class="btn btn-outline-danger btn-sm form-pill btn-eliminar"
+                                                               href="{% url 'purchase:order.delete' pk=order.id %}">
+                                                                <i class="mdi mdi-delete"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="5">No Existen Registros</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-7">
+                                        {% include 'shared/_pagination.html' %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <!-- Modal -->
+                <div class="modal fade" id="modal" style="display: none;">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Order</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="form-inline">
+                                            <div class="col-md-7">
+                                                <b>Proveedor: </b> <span class="badge-success" id="proveedor"> </span>
+                                            </div>
+                                            <div class="col-md-4">
+                                            <b>Fecha: </b> <span class="badge-info" id="fecha"> </span>
+                                            </div>
+                                        </div>
+                                        {% comment %} <div class="form-inline">
+                                            <div class="col-md-6 text-center">
+                                                <b>Fecha: </b>
+                                            </div>
+                                            <div class="col-md-6 text-center">
+                                                 <span class="badge-info" id="fecha"> </span>
+                                            </div>
+                                        </div>
+                                    </div> {% endcomment %}
+                                </div>
+
+                                <table id="table-detail" class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>N°</th>
+                                        <th>Producto</th>
+                                        <th>Precio</th>
+                                        <th>Cantidad</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="detalle-product">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden"  class="href-eliminar" value="{% url 'sale:invoice.index'%}">
+{% endblock %}
+{% block js %}
+    <script src="{% static 'SGAGRO/vendors/data-tables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'SGAGRO/vendors/data-tables/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'SGAGRO/js/delete.js' %}"></script>
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                $('#table-detail').dataTable({
+                    language:{
+                        sSearch:'Buscar',
+                        sLengthMenu:'Mostrar _MENU_ registros',
+                        sInfo: 'Mostrando registros del _START_ al _END_ de  _TOTAL_ registros',
+                        sInfoEmpty: 'Mostrando registros del 0 al _END_ de  0',
+                        sZeroRecords:'No se encontraron resultados',
+                        sLoadingRecords:'Cargando...',
+                        sInfoFiltered:'(filtrando de un total de _MAX_ registros)',
+                        sEmptyTable:'Ningún dato disponible em esta tabla',
+                        sInfoPostFix:'',
+                        sUrl:'',
+                        sInfoThousands:',',
+                        oPaginate:{
+                            sFirst: 'Primero',
+                            sLast: 'Último',
+                            sNext: 'Siguiente',
+                            sPrevious: 'Anterior',
+                        },
+                        oAria:{
+                            sSortAscending:": Activar para ordenar la columna de manera ascendente",
+                            sSortDescending:": Activar para ordenar la columna de manera descendente",
+                        },
+                        buttons:{
+                            copy:'Copiar',
+                            calvis:'Visibilidad',
+                        }
+                    },
+                });
+            });
+
+            $('.btn-detail').click(function () {
+                url = $(this).attr('url');
+                Show_Details(url);
+            });
+
+            function Show_Details (url){
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    dataType: 'json',
+                    async: false
+                }).done(function(data){
+                    //console.log(data);
+                    $('#detalle-product').html('');
+                    table='';
+                    if(data.resp = 'ok'){
+                        console.log(data);
+                        $('#proveedor').text(data.order.provider);
+                        $('#fecha').text(data.order.date);
+                        data.order.detail.forEach(function (v,k) {
+                            table += `<tr>
+                                            <td>${k}</td>
+                                            <td>${v.product.name}</td>
+                                            <td>${v.price}</td>
+                                            <td>${v.quantity}</td>
+                                            <td>${v.total}</td>
+                                    </tr> `;
+                        });
+                        $('#detalle-product').html(table);
+                        $('#modal').modal('show');
+
+
+                    }
+                }).fail(function(error){
+                    // console.log('error',error);
+                });
+            }
+        });
+    </script>
+{% endblock %}

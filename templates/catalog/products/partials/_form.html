@@ -1,0 +1,172 @@
+
+{% if form and None == 1 %}
+    {% for f in form %}
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label col-form-label-sm">{{ f.label }}</label>
+        </div>
+        <div class="form-group row">
+            {{ f }}
+        </div>
+    {% endfor %}
+
+{% else %}
+    <div class="form-group row">
+        <label class="col-form-label col-lg-3 col-sm-12 text-center"t>Nombre</label>
+        <div class="col-lg-6 col-md-9 col-sm-12">
+            <div class="input-group">
+                <input type="text"
+                       class="form-control {% if form.Name.errors %} is-invalid {% endif %}"
+                       name="Name" placeholder="Producto"
+                       id="Name"
+                       value="{{ Name }}">
+
+                <div class="invalid-feedback">
+                    {% for error in form.Name.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row" id="div-categoria">
+        <label class="col-form-label col-lg-3 col-sm-12 text-center">Categoria</label>
+        <div class="col-lg-6 col-md-9 col-sm-12">
+            <div class="input-group">
+                <select class="form-control {% if form.CategoryId.errors %} is-invalid {% endif %}"
+                        id="CategoryId"
+                        name="CategoryId">
+                    <option></option>
+                    {% for category in categories %}
+                        <option value="{{ category.pk }}" {% if category.pk|slugify == old_category|slugify %}
+                                selected {% endif %}>
+                            {{ category.Name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <div class="invalid-feedback">
+                    {% for error in form.CategoryId.errors %}
+                        {{ error }} <br>
+                    {% endfor %}
+                </div>
+                <span class="input-group-btn mt-2 ml-2">
+                    <a class="btn-new" id="add_id_CategoryId"
+                       href="javascript:;"
+                       data-json='{"modal" :"#modal-category"}'
+                       title="Nueva Categoria">
+                        <i class="mdi mdi-plus"></i>
+                    </a>
+                </span>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group row" id="div-marca">
+        <label class="col-form-label col-lg-3 col-sm-12 text-center">Marca</label>
+        <div class="col-lg-6 col-md-9 col-sm-12">
+            <div class="input-group">
+                <select class="form-control {% if form.MarkId.errors %} is-invalid {% endif %}"
+                        id="MarkId"
+                        name="MarkId">
+                    <option></option>
+                    {% for mark in marks %}
+                        <option value="{{ mark.pk }}" {% if mark.pk|slugify == old_mark|slugify %}
+                                selected {% endif %}>
+                            {{ mark.Name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <div class="invalid-feedback">
+                    {% for error in form.MarkId.errors %}
+                        {{ error }} <br>
+                    {% endfor %}
+                </div>
+                <span class="input-group-btn mt-2 ml-2">
+                    <a class="btn-new" id="add_id_MarkId"
+                       href="javascript:;"
+                       data-json='{"modal" :"#modal-mark"}'
+                       title="Nueva Marca">
+                        <i class="mdi mdi-plus"></i>
+                    </a>
+                </span>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-lg-3 col-sm-12 text-center">Costo</label>
+        <div class="col-lg-6 col-md-9 col-sm-12">
+            <div class="input-group">
+                <input type="number"
+                       class="form-control {% if form.Cost.errors %} is-invalid {% endif %}"
+                       name="Cost" id="Cost" step="0.01" min="0" max="1000"
+                       placeholder="0.00"
+                       value="{{ Cost | stringformat:".2f" }}">
+
+                <div class="invalid-feedback">
+                    {% for error in form.Cost.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-form-label col-lg-3 col-sm-12 text-center">Precio</label>
+        <div class="col-lg-6 col-md-9 col-sm-12">
+            <div class="input-group">
+                <input type="number"
+                       class="form-control {% if form.Price.errors %} is-invalid {% endif %}"
+                       placeholder="0.00"
+                       name="Price" id="Price" step="0.01"
+                       value="{{ Price | stringformat:".2f" }}" >
+
+                <div class="invalid-feedback">
+                    {% for error in form.Price.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-lg-3 col-sm-12 text-center">Stock</label>
+        <div class="col-lg-6 col-md-9 col-sm-12">
+            <div class="input-group">
+                <input type="number"
+                       placeholder="0"
+                       class="form-control {% if form.Stock.errors %} is-invalid {% endif %}"
+                       name="Stock" id="Stock" step="1" min="0" max="1000" lang="nb"
+                       value="{{ Stock }}" >
+
+                <div class="invalid-feedback">
+                    {% for error in form.Stock.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label col-lg-3 col-sm-12 text-center">Disponible</label>
+        <div class="col-lg-6 col-md-9 col-sm-12">
+            <div class="input-group">
+                <label class="switch size-sm align-content-center">
+                    <input type="checkbox"
+                           name="Availabel" id="Availabel" {% if Availabel %}checked{% endif %}>
+                    <span class="slider round success"></span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+        <div class="text-center" >
+        <textarea class="ta" name="Description" id="id_Description" rows="3">{{ Description }}</textarea>
+
+    </div>
+{% endif %}
+
+
+

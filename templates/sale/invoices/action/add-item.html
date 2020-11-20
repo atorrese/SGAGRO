@@ -1,0 +1,29 @@
+<tr>
+    <td>
+        <a href="javascript:;" class="btn btn-danger btn-pill" data-json='{"title":"Que quieres eliminar el producto: {{ Name }} "}' pk="{{ pk }}">
+            <i class="mdi mdi-delete"></i>
+        </a>
+    </td>
+    <td> {{ Name }} {% if Contains %}{{ Contains }}{% endif %}</td>
+    <td >
+        <span class="badge badge-pill badge-info">{{ Stock }}</span>
+    </td>
+    <td class="td-precio">
+        <div class="input-group">
+            <input type="number"
+                   class="form-control Price"
+                   placeholder="0.00"
+                   name="Price" id="Price"
+                   step="0.01"
+                   value="{{ Price | stringformat:".2f" }}">
+        </div>
+    </td>
+    <td class="td-cantidad">
+        <div class="flex-w bo5 of-hidden w-size17 contenedor">
+            <input type="number" name="quantity_{{ pk }}" class="size8 m-text18 t-center num-product" id="quantity" value="1" min="1" max="{{ Stock }}">
+        </div>
+    </td>
+    <td class="td-total">
+        $ {{ Price }}
+    </td>
+</tr>

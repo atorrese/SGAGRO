@@ -1,0 +1,172 @@
+<div class="form-row">
+    <div class="col-md-4 mb-3">
+        <label for="ProviderId" class="h5" >Proveedor</label>
+        <div class="input-group">
+            <select class="form-control ProviderId {% if form.ProviderId.errors %} is-invalid {% endif %}"
+                    id="ProviderId"
+                    name="ProviderId">
+                <option></option>
+                {% for provider in providers%}
+                    <option value="{{ provider.pk }}" {% if provider.pk|slugify == old_provider|slugify %}
+                            selected {% endif %}>
+                        {{ provider}}
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                        <a class="btn-new"
+                           data-json='{"modal" :"#modal-providers"}'
+                           href="javascript:;" title="Nuevo Proveedor">
+
+                            <i class="" >+</i>
+                        </a>
+                </span>
+            </div>
+
+            <div class="invalid-feedback">
+                {% for error in form.ProviderId.errors %}
+                    {{ error }} <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label for="DateInvoice" class="h5">Fecha  de Orden</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+            </div>
+            <input type="date"
+                   class="form-control {% if form.DateOrder.errors %}is-invalid{% endif %}"
+                   name="DateOrder"
+                   pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}"
+                   id="DateInvoice"
+                   value="{{DateOrder}}">
+            <div class="invalid-feedback">
+                {% for error in form.DateOrder.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        N°
+    </div>
+</div>
+<div class="form-row">
+    <div class="col-md-6 mb-3">
+        <label for="add-product">Productos</label>
+        <div class="input-group">
+            <select class=" form-control opcion_buscar"
+                    id="select-product"
+                    name="add-product">
+                <option ></option>
+                {% for product in products%}
+                    <option value="{{ product.pk }}" data-stock='{"stock":{{ product.Stock}}}'>
+                        {{ product}} - {{ product.Stock }} - {{ product.Pvp }}
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="input-group-prepend ">
+                <span class="input-group-text ml-2" >
+                    <a class="btn btn-success btn-pill btn-sm " title="Agregar Producto"  id="add-product"  style="height: 25px;">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+
+    </div>
+    <div class="col-md-3 mb-3">
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">COSTO</th>
+                    <th scope="col">CANTIDAD</th>
+                    <th scope="col">VALOR</th>
+                </tr>
+                </thead>
+                <tbody class="text-muted" id="table-product">
+                {% for DetailOrder in DetailsOrder %}
+                    <tr>
+                        <td>
+                            <a href="javascript:;" class="btn btn-danger btn-pill" data-json='{"title":"Que quieres eliminar el producto: {{ DetailOrder.ProductId.Name }} "}' pk="{{ DetailOrder.ProductId.pk }}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                        <td> {{ DetailOrder.ProductId.Name }} {% if DetailOrder.ProductId.Contains %}{{ DetailOrder.ProductId.Contains }}{% endif %}</td>
+                        <td class="td-precio">
+                            <div class="input-group">
+                                <input type="number"
+                                       class="form-control Price"
+                                       placeholder="0.00"
+                                       name="Pvp" id="Pvp"
+                                       step="0.01"
+                                       value="{{ DetailOrder.ProductId.Pvp | stringformat:".2f" }}">
+                            </div>
+                        </td>
+                        <td class="td-cantidad">
+                            <div class="flex-w bo5 of-hidden w-size17 contenedor">
+                                <input type="number"
+                                       name="quantity_{{ DetailOrder.ProductId.pk }}"
+                                       class="size8 m-text18 t-center num-product quantity"
+                                       id="quantity"
+                                       value="{{ DetailOrder.Quantity }}" min="1">
+                            </div>
+                        </td>
+                        <td class="td-total">
+                            $ {{ DetailOrder.ProductId.Pvp }}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="mt-4 mb-5">
+            {% comment %}  <strong class="text-uppercase f12">Payment Policy</strong>
+            <br> <span class="text-muted">* Thank you for choosing Magpie Studio</span>
+            <br> <span class="text-muted">* Please call us for any Questions</span>{% endcomment %}
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <table class="table invoice-table text-muted" style="margin-top: -1.01rem">
+            <thead>
+            <tr>
+                <th scope="col">Sub Total</th>
+                <th scope="col" class="sub-total">${{ TotalPay }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% comment %}            <tr>
+                <td>Descuento (<span class="porcentaje" ></span>%)</td>
+                <td class="val-descount">- $0.00</td>
+            </tr>{% endcomment %}
+            <tr>
+                <th class="text-dark">Total</th>
+                <th><span class="f24 text-dark total-pagar">${{ TotalPay }}</span></th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <input type="hidden" class="details" name="details">
+    <input type="hidden" class="TotalPay" name="TotalPay" id="TotalPay">
+
+</div>

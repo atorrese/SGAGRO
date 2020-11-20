@@ -1,0 +1,63 @@
+
+                    {% csrf_token %}
+                    <label for="name" class="col-form-label">Nombres</label>
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control names {% if Businessform.name.errors %}is-invalid{% endif %}"
+                               name="name"
+                               id="name"
+                               placeholder="Nombre" value="{% if Business%}{{ Business.name}}{% endif %}">
+                        <div class="invalid-feedback">
+                            {% for error in form.Names.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <label for="alias" class="col-form-label">Alias</label>
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control alias {% if form.alias.errors %}is-invalid{% endif %}"
+                               name="alias"
+                               id="alias"
+                               placeholder="Nombre Empresa" value="{% if Business%}{{ Business.alias}}{% endif %}">
+                        <div class="invalid-feedback">
+                            {% for error in form.alias.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <label for="description" class="col-form-label">Descripción</label>
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control desciption {% if form.name.errors %}is-invalid{% endif %}"
+                               name="description"
+                               id="description"
+                               placeholder="descripcion" value="{% if Business%}{{ Business.description}}{% endif %}">
+                        <div class="invalid-feedback">
+                            {% for error in form.Alias.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <label for="icon" class="col-form-label">Icono</label>
+                {% if Business %}
+                    <div class="mb-3">
+                    {% comment %} {{ Business.icon.url}} {% endcomment %}
+                     <img src="{{ Business.icon.url}}" class="pr-3 float-left img-responsive" style="width:100px;height:100px">
+
+                    </div>
+                   {% endif %}
+                    <div class="input-group">
+                        <input type="file"
+                               class="form-control Names {% if form.icon.errors %}is-invalid{% endif %}"
+                               name="icon"
+                               id="id_icon"
+                               >
+                        <div class="invalid-feedback">
+                            {% for error in form.icon.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                
+                

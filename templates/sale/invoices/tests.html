@@ -1,0 +1,142 @@
+  <script>
+        $("#btnGuardar").click(function () {
+
+
+            var est =$('input:checkbox[name=estado]:checked').val(),estd;
+
+            if (est !== undefined){
+                estd=1;
+            }else{
+                estd=0;
+            }
+
+            alert(estd)
+
+            var rows = [];
+            $("table#redips-drag tbody tr td").each(function () {
+                var l = $(this).find('div')
+                for (var i = 0; i < l.length; i++) {
+                    //alert($(this).find('div').eq(i).find('input.credito').eq(0).val());
+                    rows.push({
+                        Eje: $(this).attr('eje'),
+                        Nivel: $(this).attr('nivel'),
+                        Asignatura: $(this).find('div').eq(i).text().trim(),
+                        Codigo : $(this).find('div').eq(i).find('input.codigo').eq(0).val(),
+                        Creditos: $(this).find('div').eq(i).find('input.credito').eq(0).val(),
+                        Horas: $(this).find('div').eq(i).find('input.horas').eq(0).val()
+                    });
+                }
+
+            });
+            //alert(JSON.stringify(rows));
+
+            $.ajax({
+                url: '/malla/malla_curricular/',
+                method: 'POST',
+                data: {
+                    'id': $('#id_m').val(),
+                    'action':$('#accion').val(),
+                    carrera: $('#id_carrera').val(),
+                    fecha_i : $('#id_fecha_inicio').val(),
+                    fecha_f : $('#id_fecha_fin').val(),
+                    descripcion : $('#id_descripcion').val(),
+                    estado : estd,
+                    malla:JSON.stringify(rows)
+
+                },
+                dataType: 'json',
+                async: false
+            }).done(function(data){
+
+            }).fail(function(){
+
+            });
+            window.location = '{{ ruta }}';
+        });
+
+
+        $(function () {
+
+
+            if ('{{ action }}' == 'add') {
+                $('#id_descripcion').on('change', function () {
+                    /*$('#id_saldo').val($(this).val());*/
+                });
+            }
+
+
+        });
+        ////-----------------------------------------------------------
+
+        $('.searchable').multiSelect({
+            selectableHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Buscar'>",
+            selectionHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Buscar'>",
+            afterInit: function(ms) {
+                var that = this,
+                    $selectableSearch = that.$selectableUl.prev(),
+                    $selectionSearch = that.$selectionUl.prev(),
+                    selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                    selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+                that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                    .on('keydown', function(e) {
+                        if (e.which === 40) {
+                            that.$selectableUl.focus();
+                            return false;
+                        }
+                    });
+
+                that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                    .on('keydown', function(e) {
+                        if (e.which == 40) {
+                            that.$selectionUl.focus();
+                            return false;
+                        }
+                    });
+            },
+            afterSelect: function() {
+                this.qs1.cache();
+                this.qs2.cache();
+            },
+            afterDeselect: function() {
+                this.qs1.cache();
+                this.qs2.cache();
+            }
+        });
+
+        $('kaka').click(function(){
+                //document.getElementsByClassName('mostrar').innerHTML='EL NUMERO ES'+;
+                var nivel =0;
+                var eje = 0;
+                var nuevo_div;
+
+                {% for foo in asignatura %}
+                    nivel=	Math.floor(Math.random()*{{ count_nivel }}+1);
+                    eje=	Math.floor(Math.random()*{{ count_eje}}+1);
+                    var codigo = "id_"+eje+"_"+nivel;
+                    var r =document.createElement('div').appendChild(document.createTextNode('Nuevo párrafo.'))
+
+                    var nuevo_div= document.createElement(codigo).appendChild(r);
+                    nuevo_div.className='redips-drag ';
+                    $(codigo).prepend(nuevo_div);
+                    // var inser = document.getElementById(codigo).appendChild(nuevo_div);
+                    //$(codigo).prepend(inser);
+                    {#//var segundo_p = document.getElementById(codigo).getElementsByTagName('div')[1];#}
+                    {#var l= document.createElement('');#}
+                    {#//$('#'+codigo).appendChild();#}
+                    {#document.getElementById(codigo).appendChild(l);#}
+                    // alert('llege');
+                {% endfor %}
+                {#// Creamos el nuevo párrafo#}
+                {#     var nuevo_parrafo = document.createElement('p').appendChild(document.createTextNode('Nuevo párrafo.'));#}
+                {##}
+                {# // Recojemos en una variable el segundo párrafo#}
+                {# var segundo_p = document.getElementById('padre').getElementsByTagName('p')[1];#}
+                {##}
+                {# // Y ahora lo insertamos#}
+                {# document.getElementById('padre').insertBefore(nuevo_parrafo,segundo_p);#}
+
+            }
+
+        )
+    </script>

@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+{% block  title%}
+    Configuración 
+{% endblock %}
+{% block content %}
+     <div class="container-fluid">
+        <div class="d-flex mb-4">
+                    <h4 class=" d-inline-block pr-3 mr-3 "> {{ nameModel }}</h4>
+                   <a href="{% url 'security:home' %}"> <i class="mdi mdi-home text-muted hover-cursor"></i> Inicio </a>
+                   <p class="breadcrumb-item " aria-current="page">&nbsp;/&nbsp;Configuración </p>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card card-shadow mb-4">
+                    <div class="card-header border-0">
+                        <div class="custom-title-wrap bar-primary text-center">
+                            <div class="custom-title"><h2>Formulario Configuración</h2></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    
+                        <form method="POST" class="picker-form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% include 'auth/business/partials/_form.html' %}
+                            <div class="text-center mt-5">
+                                <button class="btn btn-success" type="submit"> <i class="mdi mdi-content-save-all">
+                                </i>  Guardar</button>
+                                <a class="btn btn-danger" type="button" href="{% url 'security:home' %}"><i class="mdi mdi-window-close"></i>  Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
