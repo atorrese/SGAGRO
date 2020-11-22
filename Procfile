@@ -1,0 +1,1 @@
+web: gunicorn SGAGRO.wsgi --log-file -
