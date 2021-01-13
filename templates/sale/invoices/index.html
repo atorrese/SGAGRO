@@ -29,6 +29,7 @@
                                                 <th class="sorting_asc" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 148px;">Cliente</th>
                                                 <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Fecha</th>
                                                 <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Total</th>
+                                                <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 100px;">Estado</th>
                                                 <th class="sorting" tabindex="0" aria-controls="data_table" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 190px;">Acciones</th>
                                             <tbody class="text-center">
                                             {% for invoice in invoices %}
@@ -38,6 +39,7 @@
                                                     <td>{{ invoice.ClientId }}</td>
                                                     <td>{{ invoice.DateInvoice | date:'Y-m-d'}}</td>
                                                     <td>{{ invoice.TotalPay}}</td>
+                                                    <td>{% if invoice.StatusInvoice == 2 %} <span class="badge badge-pill badge-info">Entregado</span>  {% else  %} <span class="badge badge-pill badge-success">Pagado</span>{% endif  %}  </td>
                                                     <td>
                                                         <a class="btn btn-outline-info  btn-sm form-pill btn-detail"
                                                            data-original-title="Detalle"

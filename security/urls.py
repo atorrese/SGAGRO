@@ -16,7 +16,8 @@ urlpatterns = [
     path(route='register/', view=security.RegisterView.as_view(), name='register'),
     path(route='setting/bussiness/<pk>',view=Bussiness.Update.as_view(),name='setting.update'),
     path(route='setting/bussiness/',view=Bussiness.Create.as_view(),name='setting.store'),
-    #path('dashboard/',security.Filterdashboard,name='dashboard')
+    path(route='webhook/',view=security.Webhook.as_view(),name='weekhook'),
+    path('dashboard/',security.Filterdashboard,name='dashboard')
 
 ]
 

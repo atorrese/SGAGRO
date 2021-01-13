@@ -25,8 +25,7 @@ class Provider(ModelBase):
         ordering= ('-created_at',)
 
     def have_orders(self):
-        return Order.objects.filter(Provider=self).exists()
-
+        return self.order_set.exists()
 
 class Order(ModelBase):
     ProviderId = models.ForeignKey(Provider,verbose_name='Proveedor',on_delete=models.PROTECT)
@@ -44,10 +43,15 @@ class Order(ModelBase):
     class Meta:
         verbose_name ='Pedido de Compra'
         verbose_name_plural = 'Pedidos de Compras'
+
     def get_Details(self):
         return DetailOrder.objects.filter(OrderId=self)
 
-
+    def delete_detail(self):
+        for detail in self.detailorder_set.all():
+            detail.ProductId.Stock-= detail.Quantity
+            detail.ProductId.save()
+            detail.delete()
 
 class DetailOrder(ModelBase):
     ProductId = models.ForeignKey(Product,verbose_name='Producto',on_delete=models.PROTECT)

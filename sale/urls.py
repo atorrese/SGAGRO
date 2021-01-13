@@ -3,6 +3,7 @@ from django.urls import path
 import sale.client.views as Client
 import sale.seller.views as Seller
 import sale.invoice.views as Invoice
+import sale.order.views as Order
 
 urlpatterns = [
     #Routes client
@@ -22,5 +23,9 @@ urlpatterns = [
     path(route='invoice/show/<pk>', view=Invoice.Show.as_view(), name='invoice.show'),
     path(route='invoice/delete/<pk>', view=Invoice.Delete.as_view(), name='invoice.delete'),
 
+    # Routes Order Sale
+    path(route='order/', view=Order.Index.as_view(), name='ordersale.index'),
+    path(route='order/show/<pk>', view=Order.Show.as_view(), name='ordersale.show'),
+    path(route='order/change/', view=Order.change, name='ordersale.change'),
 
 ]

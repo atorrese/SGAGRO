@@ -36,7 +36,7 @@ class Index(LoginRequiredMixin, ListView, OldDataMixin):
         return Invoice.objects.filter(
             Q(ClientId__Names__icontains=search)| Q(ClientId__SurNames__icontains=search)|
             Q(SellerId__Names__icontains=search)| Q(SellerId__SurNames__icontains=search)
-        ).order_by('-created_at')
+        ).order_by('-created_at').filter(StatusInvoice__in =[2,3])
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
@@ -99,6 +99,7 @@ class Create(LoginRequiredMixin, CreateView, OldDataMixin):
     def form_valid(self, form):
         new_invoice = form.save(commit=False)        
         new_invoice.WeekInvoice= new_invoice.DateInvoice.isocalendar()[1]
+        new_invoice.StatusInvoice=3
         new_invoice.Num_Porcent_Des= 0
         new_invoice.save()
         print(self.request.POST['details'])

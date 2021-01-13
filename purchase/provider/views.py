@@ -142,10 +142,10 @@ class Delete(LoginRequiredMixin, DeleteView):
     http_method_names = ['delete']
 
     def delete(self, request, *args, **kwargs):
-        if  self.get_object().have_orders:
+        print(self.get_object().have_orders())
+        if self.get_object().have_orders():
             status =False
             message= '¡No se puede Eliminar El Registro!'
-
         else:
             self.get_object().delete()
             status = True

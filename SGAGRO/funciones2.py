@@ -1,6 +1,7 @@
 STATUS_PAY =(
-    (1,'Debe Dienero aún'),
-    (2,'Pagado'),
+    (1,'Solicitado'),
+    (2,'Entregado'),
+    (3,'Pagado'),
 )
 
 METHOD_PAYEMENT =(

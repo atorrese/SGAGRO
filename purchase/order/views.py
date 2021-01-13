@@ -202,24 +202,10 @@ class Delete(LoginRequiredMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         order =self.get_object()
-        respo_status = 200
-        # if order.PaymentMethod ==1:
-        #     if not  order.have_pays():
-        #         data = {'status': True, 'message': '¡El Registro se eliminado correctamente!'}
-        #     else:
-        #         data = {'status': False, 'message': '¡El registro no se  puede eliminar ya que tiene pagos asignados!'}
-        # else:
-        #     data = {'status': False, 'message': '¡El Registro se eliminado correctamente!'}
-        #
-
-        # detail = DetailInvoice.objects.filter(InvoiceId=invoice)
-        # for det in detail:
-        #     det.ProductId.Stock -= det.Quantity
-        #     det.ProductId.save()
-        #     det.delete()
-        # order.delete()
-        #
+        order.delete_detail()
+        order.delete()
         data = {
+            'status' :True,
              'message': '¡El registro ha sido eliminado correctamente!'
          }
         return JsonResponse(data)

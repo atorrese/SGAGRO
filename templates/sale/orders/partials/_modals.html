@@ -1,0 +1,56 @@
+    <div class="modal fade" id="modal-sellers" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title-modal-form">Crear Vendedor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <form  class="picker-form" id="form-seller">
+                            {% include 'sale/sellers/partials/_form.html' %}
+                            {% csrf_token %}
+                            <div class="text-center mt-5">
+                                <button class="btn btn-success btn-s" data-json='{"route":"{% url "sale:seller.store"%}","modal" :"#modal-sellers"}'>
+                                    <i class="fa fa-save"></i>  Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-clients" style="display: none;">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="picker-form">
+                        {% include 'sale/clients/partials/_form.html' %}
+                        {% csrf_token %}
+                        <div class="text-center mt-5">
+                            <button class="btn btn-success btn-s"
+                                    data-json='{"route":"{% url "sale:client.store"%}","modal" :"#modal-clients"}'
+                            > <i class="fa fa-save"></i>  Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

@@ -54,7 +54,7 @@ class Invoice(ModelBase):
     SellerId = models.ForeignKey(Seller,verbose_name='Vendedor',on_delete=models.PROTECT)
     DateInvoice =models.DateField(default=now)
     WeekInvoice =models.PositiveIntegerField(verbose_name='Semana Factura',blank=True ,null=True)
-    #StatusPay = models.IntegerField(choices=STATUS_PAY,blank=True ,null=True)
+    StatusInvoice = models.IntegerField(choices=STATUS_PAY,blank=True ,null=True)
     SubTotal = models.DecimalField(blank=True ,null=True, max_digits=19,decimal_places=2,default=0)
     TotalPay = models.DecimalField(blank=True ,null=True, max_digits=19,decimal_places=2,default=0)
     Discount = models.DecimalField(blank=True ,null=True,max_digits=19, decimal_places=2, default=0)
