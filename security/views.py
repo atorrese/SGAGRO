@@ -31,7 +31,7 @@ def mi_error_404(request):
 
 class LoginView(auth_views.LoginView):
     context={}
-    context['Business']= Business.objects.first() 
+    #context['Business']= Business.objects.first() 
     extra_context = context
     template_name = 'auth/login.html'
     redirect_authenticated_user = True
