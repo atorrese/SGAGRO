@@ -89,7 +89,7 @@ class RegisterView(FormView):
     form_class = RegisterForm
     success_url = reverse_lazy('security:login')
     context={}
-    context['Business']= Business.objects.first() 
+    #context['Business']= Business.objects.first() 
     extra_context = context
     def form_valid(self, form):
         f = super(RegisterView, self).form_valid(form)
