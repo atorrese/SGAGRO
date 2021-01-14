@@ -18,14 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf.urls import  url, include
-#from security.views import HomeView
+from security.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-  """   path('', include(('security.urls', 'security'), namespace='security')),
-    path('catalog/',include(('catalog.urls','catalog'),namespace='catalog')),
-    path('sale/',include(('sale.urls','sale'),namespace='sale')),
-    path('purchase/',include(('purchase.urls','purchase'),namespace='purchase')), """
+    # path('', include(('security.urls', 'security'), namespace='security')),
+    # path('catalog/',include(('catalog.urls','catalog'),namespace='catalog')),
+    # path('sale/',include(('sale.urls','sale'),namespace='sale')),
+    # path('purchase/',include(('purchase.urls','purchase'),namespace='purchase')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
